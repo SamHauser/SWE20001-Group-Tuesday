@@ -28,7 +28,7 @@
             // the cleaned – "safe" – inputs ready to be added to the database
 
 
-            // add to customers database
+            // add to sales database
             // ...
         }
     ?>
