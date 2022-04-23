@@ -1,9 +1,9 @@
 <?php
     function OpenConn()
     {
-        $servername = "localhost";
-        $username = "root";
-        $password = "password123";
+        $servername = "database-gotogro-instance-1.caqrq45q3xiq.us-west-1.rds.amazonaws.com";
+        $username = "admin";
+        $password = "lobster123";
         $dbname = "GoToGroDB";
 
         $conn = mysqli_connect($servername, $username, $password, $dbname);
