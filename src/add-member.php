@@ -3,24 +3,24 @@
     <?php include 'includes/menu.inc'; ?>
     <h2>Add New Member</h2>
 
-    <form method="post" action="add-member.php" novalidate>
+    <form method="post" action="add-member.php">
         <fieldset>
             <legend>Enter new member details</legend>
             <p>
                 <label for="fname">First name</label>
-                <input type="text" name="fname" id="fname" />
+                <input type="text" name="fname" id="fname" required />
             </p>
             <p>
                 <label for="lname">Last name</label>
-                <input type="text" name="lname" id="lname" />
+                <input type="text" name="lname" id="lname" required />
             </p>
             <p>
                 <label for="phone">Phone number</label>
-                <input type="text" name="phone" id="phone" />
+                <input type="text" name="phone" id="phone" required />
             </p>
             <p>
                 <label for="email">Email address</label>
-                <input type="text" name="email" id="email" />
+                <input type="text" name="email" id="email" required />
             </p>
             <p>
                 <label for="contpref">Contact preference</label><br>
@@ -56,7 +56,24 @@
             $c_contpref = cleanInput($_POST["contpref"]);
 
             // add to customers database
-            // ...
+            include 'includes/dbAuth.inc';
+
+            $conn = OpenConn();
+
+            $sql = 
+            "INSERT INTO CustomerDetails (customer_firstname, customer_lastname, customer_phone, customer_email, customer_contactpreference)
+            VALUES ('$c_fname', '$c_lname', '$c_phone', '$c_email', '$c_contpref')";
+
+            if (mysqli_query($conn, $sql))
+            {
+                echo "Added customer $c_fname $c_lname to the database.";
+            }
+            else
+            {
+                echo "SQL error: " . mysqli_error($conn);
+            }
+
+            CloseConn($conn);
         }
     ?>
 
