@@ -31,4 +31,4 @@ CREATE TABLE OrderItem (
     PRIMARY KEY (order_id, product_id),
     FOREIGN KEY (order_id) REFERENCES OrderDetails(order_id),
     FOREIGN KEY (product_id) REFERENCES ProductInformation(product_id)
-)tex
+)
