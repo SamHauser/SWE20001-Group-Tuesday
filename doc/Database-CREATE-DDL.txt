@@ -1,0 +1,34 @@
+CREATE DATABASE GoToGroDB;
+
+CREATE TABLE CustomerDetails (
+    customer_id INT NOT NULL AUTO_INCREMENT,
+    customer_firstname VARCHAR(50) NOT NULL,
+    customer_lastname VARCHAR(50) NOT NULL,
+    customer_phone VARCHAR(16) NOT NULL,
+    customer_email VARCHAR(30) NOT NULL,
+    customer_contactpreference VARCHAR(5) NOT NULL,
+    PRIMARY KEY (customer_id)
+);
+
+CREATE TABLE ProductInformation (
+    product_id VARCHAR(10) NOT NULL,
+    product_name VARCHAR(30) NOT NULL,
+    product_information VARCHAR(100) NOT NULL,
+    PRIMARY KEY (product_id)
+);
+
+CREATE TABLE OrderDetails (
+    order_id INT NOT NULL AUTO_INCREMENT,
+    order_date DATE NOT NULL,
+    order_time TIME NOT NULL,
+    customer_id INT(10) NOT NULL,
+    PRIMARY KEY (order_id)
+);
+
+CREATE TABLE OrderItem (
+    order_id INT NOT NULL AUTO_INCREMENT,
+    product_id VARCHAR(10) NOT NULL,
+    PRIMARY KEY (order_id, product_id),
+    FOREIGN KEY (order_id) REFERENCES OrderDetails(order_id),
+    FOREIGN KEY (product_id) REFERENCES ProductInformation(product_id)
+)
