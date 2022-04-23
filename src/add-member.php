@@ -55,7 +55,7 @@
             $c_email = cleanInput($_POST["email"]);
             $c_contpref = cleanInput($_POST["contpref"]);
 
-            // add to customers database
+            // add to the database
             include 'includes/dbAuth.inc';
 
             $conn = OpenConn();

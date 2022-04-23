@@ -42,7 +42,7 @@
             $c_name = cleanInput($_POST["name"]);
             $c_info = cleanInput($_POST["info"]);
 
-            // add to customers database
+            // add to the database
             include 'includes/dbAuth.inc';
 
             $conn = OpenConn();
