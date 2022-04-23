@@ -37,15 +37,16 @@
         // put all the stuff to be done following form submission in here
         if ($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            // the cleaned – "safe" – inputs ready to be added to the database
-            $c_id = cleanInput($_POST["id"]);
-            $c_name = cleanInput($_POST["name"]);
-            $c_info = cleanInput($_POST["info"]);
-
-            // add to the database
             include 'includes/dbAuth.inc';
 
             $conn = OpenConn();
+
+            // the cleaned – "safe" – inputs ready to be added to the database
+            $c_id = mysqli_real_escape_string($conn, cleanInput($_POST["id"]));
+            $c_name = mysqli_real_escape_string($conn, cleanInput($_POST["name"]));
+            $c_info = mysqli_real_escape_string($conn, cleanInput($_POST["info"]));
+
+            // add to the database
 
             $sql = 
             "INSERT INTO ProductInformation (product_id, product_name, product_information)
