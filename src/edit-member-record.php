@@ -1,11 +1,11 @@
 <?php include 'includes/header.inc'; ?>
 <body>
     <?php include 'includes/menu.inc'; ?>
-    <h2>Edit Existing Sales Record</h2>
+    <h2>Edit Existing Member Record</h2>
 
-    <form method="post" action="edit-sales-record.php" novalidate>
+    <form method="post" action="edit-member-record.php" novalidate>
     <fieldset>
-            <legend>Edit sales record</legend>
+            <legend>Edit member record</legend>
             <p>
                 <label for="id">ID of member to edit</label>
                 <input type="text" name="id" id="id" required />
