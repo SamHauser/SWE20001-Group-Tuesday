@@ -79,7 +79,7 @@
             // Commit transaction
             if (mysqli_commit($conn))
             {
-                echo "Edited order.";
+                echo "Edited member.";
             }
             else
             {
