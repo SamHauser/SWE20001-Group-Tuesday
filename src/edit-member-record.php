@@ -7,12 +7,31 @@
     <fieldset>
             <legend>Edit sales record</legend>
             <p>
-                <label for="id">ID of order to edit</label>
+                <label for="id">ID of member to edit</label>
                 <input type="text" name="id" id="id" required />
             </p>
             <p>
-                <label for="items">Order item IDs (space separated)</label>
-                <textarea name="items" id="items" required rows="4" cols="50"></textarea>
+                <label for="fname">First name</label>
+                <input type="text" name="fname" id="fname" />
+            </p>
+            <p>
+                <label for="lname">Last name</label>
+                <input type="text" name="lname" id="lname" />
+            </p>
+            <p>
+                <label for="phone">Phone number</label>
+                <input type="text" name="phone" id="phone" />
+            </p>
+            <p>
+                <label for="email">Email address</label>
+                <input type="text" name="email" id="email"  />
+            </p>
+            <p>
+                <label for="contpref">Contact preference</label><br>
+                <input type="radio" id="prefemail" name="contpref" value="email" checked="checked">
+                <label for="prefemail">Email</label><br>
+                <input type="radio" id="prefphone" name="contpref" value="phone">
+                <label for="prefphone">Phone</label><br>
             </p>
             <input type="submit" value="Submit">
             <input type="reset">
@@ -38,7 +57,11 @@
 
             // the cleaned – "safe" – inputs ready to be added to the database
             $c_id = mysqli_real_escape_string($conn, cleanInput($_POST["id"]));
-            $c_items = mysqli_real_escape_string($conn, cleanInput($_POST["items"]));
+            $c_fname = mysqli_real_escape_string($conn, cleanInput($_POST["fname"]));
+            $c_lname = mysqli_real_escape_string($conn, cleanInput($_POST["lname"]));
+            $c_phone = mysqli_real_escape_string($conn, cleanInput($_POST["phone"]));
+            $c_email = mysqli_real_escape_string($conn, cleanInput($_POST["email"]));
+            $c_contpref = mysqli_real_escape_string($conn, cleanInput($_POST["contpref"]));
 
             $ac_items = explode(' ', $c_items); // array of grocery item ids
 
@@ -47,15 +70,12 @@
             mysqli_autocommit($conn, FALSE);
 
             mysqli_query($conn, 
-            "DELETE FROM OrderItem WHERE (order_id = $c_id)");
+            "UPDATE CustomerDetails SET customer_firstname = '$c_fname', 
+            customer_lastname = '$c_lname', customer_phone = '$c_phone',
+            customer_email = '$c_email', customer_contactpreference = '$c_contpref'
+            WHERE customer_id = '$c_id' ");
 
-            foreach ($ac_items as $item)
-            {
-                mysqli_query($conn, 
-                "INSERT INTO OrderItem (order_id, product_id)
-                VALUES ('$c_id', '$item')");
-            }
-
+           
             // Commit transaction
             if (mysqli_commit($conn))
             {
