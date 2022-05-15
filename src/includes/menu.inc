@@ -7,6 +7,8 @@ echo '<header>
             <a href="add-grocery.php">Add Grocery Item</a>
             <a href="add-sales-record.php">Add Sales Record</a>
             <a href="edit-sales-record.php">Edit Sales Record</a>
+            <a href="edit-grocery-record.php">Edit Grocery Item</a>
+            <a href="edit-member-record.php">Edit Member Record</a>
         </nav>
     </header>';
 ?>
