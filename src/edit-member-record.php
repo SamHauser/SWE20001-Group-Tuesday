@@ -65,8 +65,6 @@
 
             // update the database
 
-            mysqli_autocommit($conn, FALSE);
-
             $sql =
             "UPDATE CustomerDetails 
             SET customer_firstname = '$c_fname', 

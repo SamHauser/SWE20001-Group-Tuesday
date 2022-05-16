@@ -48,8 +48,6 @@
 
             // update the database
 
-            mysqli_autocommit($conn, FALSE);
-
             $sql = 
             "UPDATE ProductInformation SET product_name = '$c_name', 
             product_information = '$c_info' WHERE product_id = '$c_id' ";
