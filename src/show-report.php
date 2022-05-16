@@ -21,6 +21,7 @@
             $c_startDate = mysqli_real_escape_string($conn, cleanInput($_POST["startDate"]));
             $c_endDate = mysqli_real_escape_string($conn, cleanInput($_POST["endDate"]));
 
+            /// members list ///
             $sql = "SELECT * FROM CustomerDetails";
 
             $results = mysqli_query($conn, $sql);
@@ -47,6 +48,33 @@
                 echo "<td>" . $row['customer_phone'] . "</td>";
                 echo "<td>" . $row['customer_email'] . "</td>";
                 echo "<td>" . $row['customer_contactpreference'] . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+
+            /// top selling (this doesn't work with the dates yet :) ) ///
+            $sql = 
+            "SELECT COUNT(product_id) AS sales, product_id
+            FROM OrderItem NATURAL JOIN OrderDetails
+            GROUP BY product_id
+            ORDER BY sales DESC";
+
+            $results = mysqli_query($conn, $sql);
+
+            echo "<h3>Top selling lines</h3>";
+
+            echo "<table>";
+            echo "<table border=\"1\">\n"; 
+            echo "<tr>\n " 
+            ."<th scope=\"col\">Sales</th>\n " 
+            ."<th scope=\"col\">ID</th>\n " 
+            ."</tr>\n "; 
+
+            while($row = mysqli_fetch_array($results)) 
+            {
+                echo "<tr>";
+                echo "<td>" . $row['sales'] . "</td>";
+                echo "<td>" . $row['product_id'] . "</td>";
                 echo "</tr>";
             }
             echo "</table>";
