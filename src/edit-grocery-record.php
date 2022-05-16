@@ -50,18 +50,25 @@
 
             mysqli_autocommit($conn, FALSE);
 
-            mysqli_query($conn, 
+            $sql = 
             "UPDATE ProductInformation SET product_name = '$c_name', 
-            product_information = '$c_info' WHERE product_id = '$c_id' ");
+            product_information = '$c_info' WHERE product_id = '$c_id' ";
 
             // Commit transaction
-            if (mysqli_commit($conn))
+            if (mysqli_query($conn, $sql))
             {
-                echo "Edited grocery item.";
+                if (mysqli_affected_rows($conn) > 0)
+                { // confirmation of change
+                    echo "Edited item.";
+                }
+                else
+                {
+                    echo "Error: No database records changed. Check ID is correct.";
+                }
             }
             else
             {
-                echo "Commit failed. SQL error: " . mysqli_error($conn);
+                echo "SQL error: " . mysqli_error($conn);
             }
 
             CloseConn($conn);

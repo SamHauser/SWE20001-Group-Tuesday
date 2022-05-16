@@ -63,27 +63,32 @@
             $c_email = mysqli_real_escape_string($conn, cleanInput($_POST["email"]));
             $c_contpref = mysqli_real_escape_string($conn, cleanInput($_POST["contpref"]));
 
-            $ac_items = explode(' ', $c_items); // array of grocery item ids
-
             // update the database
 
             mysqli_autocommit($conn, FALSE);
 
-            mysqli_query($conn, 
-            "UPDATE CustomerDetails SET customer_firstname = '$c_fname', 
+            $sql =
+            "UPDATE CustomerDetails 
+            SET customer_firstname = '$c_fname', 
             customer_lastname = '$c_lname', customer_phone = '$c_phone',
             customer_email = '$c_email', customer_contactpreference = '$c_contpref'
-            WHERE customer_id = '$c_id' ");
+            WHERE customer_id = '$c_id' ";
 
-           
             // Commit transaction
-            if (mysqli_commit($conn))
+            if (mysqli_query($conn, $sql))
             {
-                echo "Edited member.";
+                if (mysqli_affected_rows($conn) > 0)
+                { // confirmation of change
+                    echo "Edited customer '$c_fname'.";
+                }
+                else
+                {
+                    echo "Error: No database records changed. Check ID is correct.";
+                }
             }
             else
             {
-                echo "Commit failed. SQL error: " . mysqli_error($conn);
+                echo "SQL error: " . mysqli_error($conn);
             }
 
             CloseConn($conn);
