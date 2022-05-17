@@ -52,7 +52,7 @@
             }
             echo "</table>";
 
-            /// top selling (this doesn't work with the dates yet :) ) ///
+            /// top selling (this doesn't work with the dates yet :) )  ///
             $sql = 
             "SELECT COUNT(product_id) AS sales, product_id
             FROM OrderItem NATURAL JOIN OrderDetails
