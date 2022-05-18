@@ -52,9 +52,9 @@
             }
             echo "</table>";
 
-            /// top selling (this doesn't work with the dates yet :) )  ///
+            /// top selling ///
             $sql = 
-            "SELECT COUNT(product_id) AS sales, product_id FROM
+            "SELECT COUNT(product_id) AS sales, product_id, (COUNT(product_id) * 3.35) AS cost FROM
             (SELECT product_id, order_id, order_date FROM OrderItem NATURAL JOIN OrderDetails WHERE 
             order_date BETWEEN '$c_startDate' AND '$c_endDate') AS I_LOVE_SQL
             GROUP BY product_id
@@ -68,6 +68,36 @@
             echo "<table border=\"1\">\n"; 
             echo "<tr>\n " 
             ."<th scope=\"col\">Sales</th>\n " 
+            ."<th scope=\"col\">ID</th>\n "
+            ."<th scope=\"col\">Total cost ($)</th>\n "  
+            ."</tr>\n "; 
+
+            while($row = mysqli_fetch_array($results)) 
+            {
+                echo "<tr>";
+                echo "<td>" . $row['sales'] . "</td>";
+                echo "<td>" . $row['product_id'] . "</td>";
+                echo "<td>" . $row['cost'] . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+
+            /// customers by orders ///
+            $sql = 
+            "SELECT COUNT(product_id) AS sales, product_id FROM
+            (SELECT product_id, order_id, order_date FROM OrderItem NATURAL JOIN OrderDetails WHERE 
+            order_date BETWEEN '$c_startDate' AND '$c_endDate') AS I_LOVE_SQL
+            GROUP BY product_id
+            ORDER BY sales DESC";
+
+            $results = mysqli_query($conn, $sql);
+
+            echo "<h3>Top Customers</h3>";
+
+            echo "<table>";
+            echo "<table border=\"1\">\n"; 
+            echo "<tr>\n " 
+            ."<th scope=\"col\">Sales</th>\n "
             ."<th scope=\"col\">ID</th>\n " 
             ."</tr>\n "; 
 
