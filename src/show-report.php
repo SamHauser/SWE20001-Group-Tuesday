@@ -54,8 +54,9 @@
 
             /// top selling (this doesn't work with the dates yet :) )  ///
             $sql = 
-            "SELECT COUNT(product_id) AS sales, product_id
-            FROM OrderItem NATURAL JOIN OrderDetails
+            "SELECT COUNT(product_id) AS sales, product_id FROM
+            (SELECT product_id, order_id, order_date FROM OrderItem NATURAL JOIN OrderDetails WHERE 
+            order_date BETWEEN '$c_startDate' AND '$c_endDate') AS T
             GROUP BY product_id
             ORDER BY sales DESC";
 
