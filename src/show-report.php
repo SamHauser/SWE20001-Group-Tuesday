@@ -57,8 +57,8 @@
             /// top selling ///
             $sql = 
             "SELECT COUNT(product_id) AS sales, product_id, (COUNT(product_id) * 3.35) AS cost FROM
-            (SELECT product_id, order_id, order_date FROM OrderItem NATURAL JOIN OrderDetails WHERE 
-            order_date BETWEEN '$c_startDate' AND '$c_endDate') AS I_LOVE_SQL
+            (SELECT product_id, order_id, order_date FROM OrderItem NATURAL JOIN OrderDetails 
+            WHERE order_date BETWEEN '$c_startDate' AND '$c_endDate') AS I_LOVE_SQL
             GROUP BY product_id
             ORDER BY sales DESC";
 
