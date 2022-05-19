@@ -56,10 +56,10 @@
 
             // inventory//
             $sql = 
-            "SELECT * FROM ProductInformation";
+            "SELECT product_id,price, quantity, price*quantity AS total_price FROM ProductInformation";
 
             $results = mysqli_query($conn, $sql);
-
+            
             echo "<h3>Inventory Report</h3>";
 
             echo "<table>";
@@ -78,7 +78,7 @@
                 echo "<td>" . $row['product_id'] . "</td>";
                 echo "<td>" . $row['quantity'] . "</td>";
                 echo "<td>" . $row['price'] . "</td>";
-                echo "<td>" . $row['total']*$row['price'] . "</td>";
+                echo "<td>" . $row['total_price'] . "</td>";
                 echo "</tr>";
             }
             echo "</table>";
