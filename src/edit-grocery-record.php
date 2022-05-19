@@ -18,6 +18,14 @@
                 <label for="info">Updated product information</label>
                 <textarea name="info" id="info" required rows="4" cols="50"></textarea>
             </p>
+            <p>
+                <label for="quan">Updated quantity</label>
+                <input type="text" name="quan" id="quan" required />
+            </p>
+            <p>
+                <label for="price">Updated price</label>
+                <input type="text" name="price" id="price" required />
+            </p>
             <input type="submit" value="Submit">
             <input type="reset">
             </p>
@@ -44,13 +52,15 @@
             $c_id = mysqli_real_escape_string($conn, cleanInput($_POST["id"]));
             $c_name = mysqli_real_escape_string($conn, cleanInput($_POST["name"]));
             $c_info = mysqli_real_escape_string($conn, cleanInput($_POST["info"]));
+            $c_quan = mysqli_real_escape_string($conn, cleanInput($_POST["quan"]));
+            $c_price = mysqli_real_escape_string($conn, cleanInput($_POST["price"]));
            
 
             // update the database
 
             $sql = 
             "UPDATE ProductInformation SET product_name = '$c_name', 
-            product_information = '$c_info' WHERE product_id = '$c_id' ";
+            product_information = '$c_info', quantity = '$c_quan', price = '$c_price' WHERE product_id = '$c_id' ";
 
             // Commit transaction
             if (mysqli_query($conn, $sql))
