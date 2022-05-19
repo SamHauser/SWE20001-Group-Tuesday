@@ -11,7 +11,7 @@
                 <input type="date" name="date" id="date" required />
             </p>
             <p>
-                <label for="time of order">Time of order</label>
+                <label for="timer">Time of order</label>
                 <input type="time" name="time" id="time" required />
             </p>
             <p>

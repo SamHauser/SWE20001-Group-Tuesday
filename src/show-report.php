@@ -54,32 +54,31 @@
 
             echo "<br><p>Data for period between $c_startDate and $c_endDate:</p>";
 
-            /// top selling ///
+            // inventory//
             $sql = 
-            "SELECT COUNT(product_id) AS sales, product_id, (COUNT(product_id) * 3.35) AS cost FROM
-            (SELECT product_id, order_id, order_date FROM OrderItem NATURAL JOIN OrderDetails 
-            WHERE order_date BETWEEN '$c_startDate' AND '$c_endDate') AS I_LOVE_SQL
-            GROUP BY product_id
-            ORDER BY sales DESC";
+            "SELECT * FROM ProductInformation";
 
             $results = mysqli_query($conn, $sql);
 
-            echo "<h3>Top Selling Lines</h3>";
+            echo "<h3>Inventory Report</h3>";
 
             echo "<table>";
             echo "<table border=\"1\">\n"; 
             echo "<tr>\n " 
-            ."<th scope=\"col\">Sales</th>\n " 
+          
             ."<th scope=\"col\">ID</th>\n "
+            ."<th scope=\"col\">Quantity</th>\n "
+            ."<th scope=\"col\">Price each ($)</th>\n "
             ."<th scope=\"col\">Total cost ($)</th>\n "  
             ."</tr>\n "; 
 
             while($row = mysqli_fetch_array($results)) 
             {
                 echo "<tr>";
-                echo "<td>" . $row['sales'] . "</td>";
                 echo "<td>" . $row['product_id'] . "</td>";
-                echo "<td>" . $row['cost'] . "</td>";
+                echo "<td>" . $row['quantity'] . "</td>";
+                echo "<td>" . $row['price'] . "</td>";
+                echo "<td>" . $row['total']*$row['price'] . "</td>";
                 echo "</tr>";
             }
             echo "</table>";
